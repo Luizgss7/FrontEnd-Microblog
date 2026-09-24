@@ -1,22 +1,17 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import ListaItems from './views/ListaItens';
-import NovoItem from './views/NovoItem';
-import DetalhaItem from './views/DetalhaItem';
+import Timeline from './views/Timeline';
 
 function App() {
   return (
     <BrowserRouter>
       {/* Navigation */}
       <nav>
-        <Link to="/">Lista Item</Link> |{" "}
-        <Link to="/novoItem">Novo Item</Link>
+        <Link to="/">Timeline</Link> |{" "}
       </nav>
 
       {/* Routes */}
       <Routes>
-        <Route path="/" element={<ListaItems/>} />
-        <Route path="/novoItem" element={<NovoItem/>} />
-        <Route path="/detalhaItem/:idItem" element={<DetalhaItem/>} />
+        <Route path="/" element={<Timeline/>} />
       </Routes>
     </BrowserRouter>
   );
