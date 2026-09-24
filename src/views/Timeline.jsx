@@ -1,26 +1,21 @@
-import Botao from '../components/Botao';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function ListaItems() {
+function Timeline() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [itemsList, setItemsList] = useState([]);
+  const [postList, setPostList] = useState([]);
   const navigate = useNavigate()
-
-const handleClick = (idItem) => {
-  navigate(`/detalhaItem/${idItem}`);
-};
 
  useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await fetch('http://127.0.0.1:5000/api/items');
+            const response = await fetch('http://127.0.0.1:5001/api/timeline/Login1');
             if (!response.ok) {
               throw new Error(`HTTP error! status: ${response.status}`);
             }
             const result = await response.json();
-            setItemsList(result);
+            setPostList(result);
           } catch (error) {
             setError(error);
           } finally {
@@ -37,23 +32,18 @@ const handleClick = (idItem) => {
 
   return(
     <table>
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Preco</th>
-          <th>Ações</th>
-      </tr>
-      </thead>
       <tbody>
-      {itemsList.map(item => 
-        <tr key={item.id}>
-          <td>{item.name}</td>
-          <td>{item.price}</td>
-          <td><button id={item.id} onClick={()=>handleClick(item.id)}>Detalhe</button></td>
+      {postList.map(post => 
+        <tr key={post.id}>
+          <td>
+            {post.login} <br />
+            {post.text} <br />
+            {post.create_date} <br /> <br />
+          </td>
         </tr>
         )}
       </tbody>
     </table>
   );
 }
-export default ListaItems;
+export default Timeline;
